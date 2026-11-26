@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>YUVIXA – Your Campus. Your People. Your World.</title>
+<style>
+:root{--bg:#fff;--ink:#121212;--mut:#737373;--line:#dbdbdb;--soft:#f4f4f6;--a:#6d4aff;--b:#b04cf0;--like:#ed4956;--warn:#fef3c7;--warnink:#78350f;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b0b12;--ink:#f5f5f7;--mut:#a3a3b5;--line:#2b2b3d;--soft:#171724;--a:#8f74ff;--warn:#3b2a08;--warnink:#fcd34d;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0b0b12;--ink:#f5f5f7;--mut:#a3a3b5;--line:#2b2b3d;--soft:#171724;--a:#8f74ff;--warn:#3b2a08;--warnink:#fcd34d;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit;color:inherit}button{cursor:pointer;background:none;border:0;padding:0}:focus-visible{outline:2px solid var(--a);outline-offset:2px}
+#banner{background:var(--warn);color:var(--warnink);text-align:center;padding:.3rem .5rem;font-size:.75rem}
+.logo{font:800 1.45rem/1 system-ui;letter-spacing:.03em;background:linear-gradient(135deg,var(--a),var(--b) 60%,#ec4899);-webkit-background-clip:text;background-clip:text;color:transparent}
+.rail{position:fixed;top:27px;bottom:0;left:0;width:245px;border-right:1px solid var(--line);padding:1.5rem .8rem;display:flex;flex-direction:column;gap:.2rem;background:var(--bg);z-index:5}
+.rail .logo{padding:.4rem .8rem 1.4rem}.rail a,.rail button.ni{display:flex;align-items:center;gap:1rem;padding:.8rem;border-radius:10px;font-size:15px;width:100%;text-align:left}
+.rail a:hover,.rail .ni:hover{background:var(--soft)}.on{font-weight:700}.badge{background:var(--like);color:#fff;border-radius:999px;font-size:.7rem;padding:0 .4rem;font-weight:700}
+.top,.bottom{display:none}main{margin-left:245px;display:flex;justify-content:center;gap:4rem;padding:1.5rem 1rem 3rem}.col{width:min(470px,100%)}.wide{width:min(935px,100%)}.right{width:300px;padding-top:.5rem}
+@media(max-width:1100px){.right{display:none}}
+@media(max-width:760px){.rail{display:none}main{margin:0;padding:.5rem 0 5rem}
+.top{display:flex;position:sticky;top:0;z-index:6;align-items:center;justify-content:space-between;padding:.5rem .8rem;background:var(--bg);border-bottom:1px solid var(--line)}
+.bottom{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:6;justify-content:space-around;background:var(--bg);border-top:1px solid var(--line);padding:.55rem 0 calc(.55rem + env(safe-area-inset-bottom,0px))}}
+select{background:var(--soft);border:1px solid var(--line);border-radius:8px;padding:.25rem .4rem;max-width:9.5rem}
+.av{display:inline-grid;place-items:center;border-radius:50%;color:#fff;font-weight:700;flex:none}.ring{display:inline-block;padding:2px;border-radius:50%;background:linear-gradient(135deg,#f9a03f,#e83e8c 50%,var(--a))}.ring.seen{background:var(--line)}.ring.none{background:transparent}.ring .av{border:2px solid var(--bg)}
+.stories{display:flex;gap:.9rem;overflow-x:auto;padding:.3rem .8rem 1rem}.story{display:grid;justify-items:center;gap:.25rem;min-width:66px;font-size:12px}
+.post{border-bottom:1px solid var(--line);margin-bottom:1.2rem;padding-bottom:.6rem}.ph{display:flex;align-items:center;gap:.6rem;padding:.6rem .8rem}.ph b{font-weight:600}.mut,small{color:var(--mut)}
+.media{aspect-ratio:1/1;display:grid;place-items:center;padding:2rem;color:#fff;text-align:center;font-size:1.3rem;font-weight:600;user-select:none;border-radius:4px;overflow:hidden;position:relative}
+.heart{position:absolute;font-size:5rem;opacity:0;pointer-events:none}.heart.go{animation:hp .8s}@keyframes hp{20%{opacity:.95;transform:scale(1.1)}100%{opacity:0;transform:scale(1.4)}}
+.acts{display:flex;align-items:center;gap:.9rem;padding:.6rem .8rem .2rem}.acts .sp{flex:1}.acts button{display:grid;place-items:center}.acts .liked{color:var(--like)}
+.pad8{padding:0 .8rem;margin:.15rem 0}.cf{display:flex;gap:.4rem;padding:.3rem .8rem}.cf input{flex:1;background:none;border:0;padding:.3rem 0;outline:none}.cf button{color:var(--a);font-weight:700}
+.btn{background:var(--a);color:#fff;border-radius:8px;padding:.4rem .9rem;font-weight:600;display:inline-block}.btn.ghost{background:var(--soft);color:var(--ink)}.pill{background:var(--soft);border-radius:8px;padding:.4rem .9rem;font-weight:600}
+.box{border:1px solid var(--line);border-radius:10px;padding:1rem;margin:0 .6rem 1rem}h2{margin:0 0 .6rem;font-size:1.05rem}.row{display:flex;align-items:center;justify-content:space-between;gap:.6rem;padding:.5rem 0}.row>a>div,.row>div{display:flex;align-items:center;gap:.7rem}
+.field{width:100%;background:var(--soft);border:1px solid var(--line);border-radius:8px;padding:.55rem .7rem}.dot{width:8px;height:8px;border-radius:50%;background:var(--a)}
+.sim{background:var(--warn);color:var(--warnink);border-radius:5px;padding:.05rem .35rem;font-size:.65rem;font-weight:700;vertical-align:middle}
+.prof{display:flex;gap:2.5rem;align-items:center;padding:1rem 1rem 2rem}.prof h1{font-size:1.25rem;font-weight:400;margin:0}.ln{display:flex;gap:.8rem;align-items:center;flex-wrap:wrap;margin-bottom:.8rem}.stats{display:flex;gap:1.6rem;margin-bottom:.8rem}
+@media(max-width:760px){.prof{gap:1rem;padding:1rem}}
+.tabs{display:flex;justify-content:center;gap:3rem;border-top:1px solid var(--line)}.tabs a{display:flex;gap:.4rem;align-items:center;padding:.9rem 0;font-size:12px;letter-spacing:.08em;color:var(--mut)}.tabs a.on{color:var(--ink);border-top:1px solid var(--ink);margin-top:-1px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}.tile{aspect-ratio:1;display:grid;place-items:center;padding:.6rem;color:#fff;font-size:.8rem;font-weight:600;text-align:center;position:relative;overflow:hidden;width:100%}
+.tile .hv{position:absolute;inset:0;background:rgba(0,0,0,.45);display:none;place-items:center;font-weight:700}.tile:hover .hv,.tile:focus-visible .hv{display:grid}
+#ov{position:fixed;inset:0;z-index:30;background:rgba(0,0,0,.75);display:none;place-items:center;padding:1rem}#ov.on{display:grid}
+.pm{background:var(--bg);border-radius:8px;display:grid;grid-template-columns:minmax(0,1fr) 340px;width:min(960px,100%);max-height:92vh;overflow:hidden;position:relative}.pm .media{border-radius:0;height:100%;aspect-ratio:auto;min-height:340px}
+.pr{display:flex;flex-direction:column;min-height:0}.pr .cl{flex:1;overflow:auto;padding:.6rem .8rem}@media(max-width:760px){.pm{grid-template-columns:1fr;overflow:auto}.pm .media{aspect-ratio:1/1;height:auto}}
+.x{position:absolute;top:.6rem;right:.7rem;z-index:2;color:#fff;background:rgba(0,0,0,.35);border-radius:50%;padding:.3rem}
+.cm{display:grid;width:min(420px,100%);height:min(90vh,760px);background:var(--bg);border-radius:12px;padding:1rem;align-content:start;gap:.7rem;position:relative}
+.sv{width:min(400px,100%);height:min(88vh,720px);border-radius:12px;color:#fff;position:relative;display:grid;place-items:center;padding:2rem;text-align:center;font-size:1.5rem;font-weight:700;cursor:pointer}
+.sv .pb{position:absolute;left:.8rem;right:.8rem;top:.7rem;height:3px;background:rgba(255,255,255,.35);border-radius:3px;overflow:hidden}.sv .pb i{display:block;height:100%;background:#fff;animation:fill 5s linear forwards}@keyframes fill{from{width:0}to{width:100%}}
+.sv .sh{position:absolute;top:1.4rem;left:.9rem;display:flex;gap:.6rem;align-items:center;font-size:.9rem;font-weight:600}
+#toast{position:fixed;left:50%;bottom:5.5rem;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:.6rem 1rem;border-radius:10px;opacity:0;transition:opacity .25s;z-index:50;pointer-events:none}#toast.on{opacity:1}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.sv .pb i{width:100%}}
+</style>
+</head>
+<body>
+<div id="banner" role="status">Demo mode: fictional data. Verification and notifications are simulated, not real.</div>
+<header class="top"><span class="logo">YUVIXA</span><span style="display:flex;gap:.5rem;align-items:center"><select class="who" aria-label="Demo: view as user"></select><button data-act="theme" aria-label="Toggle theme" id="t1"></button></span></header>
+<nav class="rail" id="rail" aria-label="Main"></nav>
+<main id="main"><section id="view" class="col" aria-live="polite"></section><aside class="right" id="right"></aside></main>
+<nav class="bottom" id="bottom" aria-label="Main"></nav>
+<div id="ov" role="dialog" aria-modal="true"></div><div id="toast" role="status"></div>
+
+<script>
+const Y = (() => {
+// Mirrors supabase/migrations/0001_foundation.sql. Client use is for UX only; the database is authoritative.
+const GRADUATE_WINDOW_YEARS = 3;
+const CAMPUS_DEADLINE_DAYS = 14;
+
+                                                             
+                                                                                 
+
+const pad = (n        ) => String(n).padStart(2, '0');
+const utcDate = (d      )         => `${d.getUTCFullYear()}-${pad(d.getUTCMonth() + 1)}-${pad(d.getUTCDate())}`;
+
+// Same clamping as Postgres: Feb 29 minus N years lands on Feb 28 of a non-leap year.
+function minusYears(iso        , years        )         {
+  const [y, m, d] = iso.split('-').map(Number);
+  const ty = y - years;
+  const maxDay = new Date(Date.UTC(ty, m, 0)).getUTCDate();
+  return `${ty}-${pad(m)}-${pad(Math.min(d, maxDay))}`;
+}
+
+/** Registration-time only. Window is inclusive, evaluated on the UTC date. Never an expiry rule. */
+function isGraduateEligibleAtRegistration(graduationDate        , now      )          {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(graduationDate)) return false;
+  const today = utcDate(now);
+  return graduationDate <= today && graduationDate >= minusYears(today, GRADUATE_WINDOW_YEARS);
+}
+
+const campusDeadline = (registeredAt      )       =>
+  new Date(registeredAt.getTime() + CAMPUS_DEADLINE_DAYS * 86_400_000);
+
+/** Verified accounts are never restricted for graduating or leaving campus. */
+function mustRestrictForCampusDeadline(s                                                    , now      )          {
+  return s.campusState === 'pending' && s.campusDeadline.getTime() < now.getTime();
+}
+
+/** Birthday matching on the celebrant's LOCAL date. Feb 29 is celebrated on Feb 28 in non-leap years. */
+function isBirthdayOn(birthDate        , localDate        )          {
+  const [, bm, bd] = birthDate.split('-').map(Number);
+  const [ly, lm, ld] = localDate.split('-').map(Number);
+  if (bm === lm && bd === ld) return true;
+  const leap = (ly % 4 === 0 && ly % 100 !== 0) || ly % 400 === 0;
+  return bm === 2 && bd === 29 && !leap && lm === 2 && ld === 28;
+}
+
+const TRANSITIONS                                               = {
+  pending: ['accepted', 'rejected', 'cancelled'], accepted: [], rejected: [], cancelled: [],
+};
+const canTransition = (from                  , to                  ) => TRANSITIONS[from].includes(to);
+
+const birthdayDedupeKey = (celebrant        , year        , recipient        ) => `bday:${celebrant}:${year}:${recipient}`;
+
+// Deterministic, entirely fictional dataset. Same code => byte-identical output. "Now" is fixed for reproducibility.
+                                                                                                               
+
+const SEED_NOW = '2026-10-26T06:00:00.000Z';
+const H = 3_600_000, D = 24 * H;
+const ago = (ms        ) => new Date(Date.parse(SEED_NOW) - ms).toISOString();
+const pad2 = (n        ) => String(n).padStart(2, '0');
+const id = (p        , i        ) => `${p}_${pad2(i + 1)}`;
+function rng(seed        ) {
+  let a = seed >>> 0;
+  return () => { a = (a + 0x6D2B79F5) >>> 0; let t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+}
+const F = ['Aarav', 'Diya', 'Kabir', 'Ananya', 'Rohan', 'Meera', 'Ishaan', 'Saanvi', 'Vihaan', 'Tara'];
+const L = ['Sharma', 'Iyer', 'Nair', 'Khanna', 'Reddy', 'Bose', 'Mehta', 'Gill', 'Joshi', 'Rao'];
+const BODIES = ['Anyone up for chai at the canteen?', 'Library group study tonight, bring notes.', 'Hackathon team needs one designer.',
+  'Lost my earphones near the gym, please help!', 'Sunset at the football ground is unreal today.', 'Mess menu rating: 7/10, paneer wins.'];
+const REG_DAYS = [400, 3, 20, 10, 800];                          // scenario per user index % 5
+const CASE_BY = ['verified', 'pending', 'pending', 'review_needed', 'verified']         ;
+
+function buildSeed()          {
+  const users                = Array.from({ length: 20 }, (_, i) => {
+    const r = rng(1000 + i), regDays = REG_DAYS[i % 5], grad = i % 5 === 4;
+    const month = i < 5 ? 10 : 1 + Math.floor(r() * 12), day = i < 5 ? 26 : 1 + Math.floor(r() * 28);  // users 0-4: birthday on seed day
+    return { id: id('usr', i), username: `${F[i % 10]}${L[(i * 3 + 1 + Math.floor(i / 10)) % 10]}${i}`.toLowerCase(),
+      displayName: `${F[i % 10]} ${L[(i * 3 + 1 + Math.floor(i / 10)) % 10]}`, collegeId: 'col_01', course: ['B.Tech CSE', 'BBA', 'B.Des', 'B.Sc Physics'][i % 4],
+      enrollmentKind: grad ? 'graduate' : 'current', graduationDate: grad ? ago(regDays * D + 60 * D).slice(0, 10) : null,
+      birthDate: `2004-${pad2(month)}-${pad2(day)}`, tz: 'Asia/Kolkata', visibility: i % 7 === 6 ? 'connections' : 'college',
+      avatarSeed: `yuvixa-${i}`, registeredAt: ago(regDays * D), accountStatus: 'active' };
+  });
+  const prefOverride                                     = { 0: [true, true], 1: [true, true], 2: [true, false], 3: [false, true], 4: [true, true] };
+  const birthdayPrefs = users.map((u, i) => { const r = rng(2000 + i); const [visible, reminders] = prefOverride[i] ?? [r() < .5, r() < .5]; return { userId: u.id, visible, reminders }; });
+
+  const posts = Array.from({ length: 30 }, (_, i) => { const r = rng(3000 + i);
+    return { id: id('pst', i), authorId: users[i % 20].id, body: BODIES[Math.floor(r() * BODIES.length)], visibility: (i % 10 === 9 ? 'private' : 'connections')                             ,
+      createdAt: ago((i + 1) * 5 * H), deletedAt: null }; });
+  const comments = Array.from({ length: 50 }, (_, i) => ({ id: id('cmt', i), postId: posts[i % 30].id, authorId: users[(i * 7 + 3) % 20].id, body: ['Count me in!', 'Nice one 😄', 'Same here.', 'Where exactly?', 'Love this.'][i % 5], createdAt: ago(i * 2 * H) }));
+  const likes = Array.from({ length: 25 }, (_, i) => ({ postId: posts[i].id, userId: users[(i * 3 + 1) % 20].id, createdAt: ago(i * H) }));
+  const statuses = ['accepted', 'accepted', 'pending', 'rejected', 'accepted']         ;
+  const requests                      = Array.from({ length: 15 }, (_, i) => ({ id: id('req', i), requesterId: users[i].id, addresseeId: users[i + 1].id,
+    status: statuses[i % 5], createdAt: ago((20 - i) * D), respondedAt: statuses[i % 5] === 'pending' ? null : ago((19 - i) * D) }));
+  const clubs = ['Coding Club', 'Dance Society', 'Photography Club', 'Debate Union', 'Robotics Lab'].map((name, i) => ({ id: id('clb', i), name, about: `${name}: open to all branches.`, organizerId: users[i].id }));
+  const events = Array.from({ length: 10 }, (_, i) => ({ id: id('evt', i), title: ['Hack Night', 'Fresher’s Fest', 'Photo Walk', 'Open Mic', 'Robo Race'][i % 5] + ` #${i + 1}`,
+    clubId: clubs[i % 5].id, organizerId: users[i % 5].id, startsAt: new Date(Date.parse(SEED_NOW) + (i + 1) * D).toISOString(), location: ['Main Auditorium', 'Block C Lawn', 'Library Steps'][i % 3] }));
+  const confessions = Array.from({ length: 10 }, (_, i) => ({ id: id('cnf', i), body: ['I still don’t know the way to Block D.', 'The canteen samosa deserves an award.', 'I talk to the library cat daily.'][i % 3],
+    status: (i === 7 ? 'hidden' : i === 8 ? 'pending_review' : 'visible')                                           , createdAt: ago(i * 7 * H) }));
+  const matches = Array.from({ length: 5 }, (_, i) => ({ id: id('mtc', i), aId: users[10 + i].id, bId: users[15 + i].id, status: (i % 2 ? 'one_sided' : 'mutual')                           }));
+  const lostFound = Array.from({ length: 10 }, (_, i) => ({ id: id('lnf', i), kind: (i % 2 ? 'found' : 'lost')                    , title: ['Blue water bottle', 'Black umbrella', 'Wired earphones', 'Calculator', 'Notebook'][i % 5],
+    location: ['Library', 'Gym', 'Block A', 'Canteen', 'Auditorium'][i % 5], status: (i === 9 ? 'resolved' : 'open')                       , reporterId: users[i].id, createdAt: ago(i * 9 * H) }));
+  const kinds                     = ['connection_request', 'connection_accepted', 'like', 'comment', 'event_reminder', 'verification', 'announcement'];
+  const notifications = Array.from({ length: 15 }, (_, i) => ({ id: id('ntf', i), userId: users[i % 20].id, kind: kinds[i % 7], link: i % 7 === 4 ? `/events/${events[0].id}` : '/notifications',
+    dedupeKey: `seed:${i}`, readAt: i % 3 === 0 ? ago(i * H) : null, createdAt: ago((i + 1) * 3 * H) }));
+  const verification                     = users.map((u, i) => ({ userId: u.id, emailStatus: 'approved', idStatus: CASE_BY[i % 5] === 'verified' ? 'approved' : i % 5 === 3 ? 'manual_review' : 'pending',
+    livenessStatus: i % 2 ? 'not_started' : 'approved', campusState: CASE_BY[i % 5], campusDeadline: new Date(Date.parse(u.registeredAt) + 14 * D).toISOString(), simulated: true }));
+  return { users, birthdayPrefs, posts, comments, likes, requests, blocks: [], events, clubs, confessions, matches, lostFound, notifications, verification };
+}
+
+// Mock repositories + domain services. UI must depend on the *Repository interfaces only; Supabase adapters implement the same ones.
+// Nothing here is real security: mock auth/verification/notifications simulate behaviour for development.
+                                                                                                                                                           
+
+
+class DomainError extends Error { code        ; constructor(code        ) { super(code); this.code = code; } }   // same codes as the future DB errors
+                                      
+const fixedClock = (iso        )                                     => { let t = Date.parse(iso); return { now: () => new Date(t), set: v => { t = Date.parse(v); } }; };
+
+class MockStore {
+  data         ; deliveryLog                = []; saved                                       = []; seq = 1000;
+  constructor(data          = buildSeed()) { this.data = structuredClone(data); }
+  reset() { this.data = structuredClone(buildSeed()); this.deliveryLog = []; this.saved = []; }
+  blocked(a        , b        ) { return this.data.blocks.some(x => (x.blockerId === a && x.blockedId === b) || (x.blockerId === b && x.blockedId === a)); }
+  connected(a        , b        ) { return !this.blocked(a, b) && this.data.requests.some(r => r.status === 'accepted' && ((r.requesterId === a && r.addresseeId === b) || (r.requesterId === b && r.addresseeId === a))); }
+  /** Idempotent: a repeated dedupeKey for the same user creates nothing. Delivery is logged as simulated, never pushed. */
+  notify(userId        , kind                  , link        , dedupeKey        , at      )          {
+    if (this.data.notifications.some(n => n.userId === userId && n.dedupeKey === dedupeKey)) return false;
+    const n                  = { id: `ntf_${this.seq++}`, userId, kind, link, dedupeKey, readAt: null, createdAt: at.toISOString() };
+    this.data.notifications.push(n); this.deliveryLog.push({ notificationId: n.id, channel: 'in_app', status: 'simulated', at: at.toISOString() }); return true;
+  }
+}
+
+                                       
+                                                             
+                                                                                                         
+                                                                                                                   
+ 
+class MockConnectionRepository                                 {
+  s           ; clock       ; constructor(s           , clock       ) { this.s = s; this.clock = clock; }
+  async send(from        , to        ) {
+    const u = this.s.data.users;
+    if (from === to) throw new DomainError('self_connection');
+    if (!u.some(x => x.id === from) || !u.some(x => x.id === to)) throw new DomainError('user_not_found');
+    if (this.s.blocked(from, to)) throw new DomainError('cannot_connect');
+    if (this.s.data.requests.some(r => (r.status === 'pending' || r.status === 'accepted') && ((r.requesterId === from && r.addresseeId === to) || (r.requesterId === to && r.addresseeId === from)))) throw new DomainError('duplicate_request');
+    const r                    = { id: `req_${this.s.seq++}`, requesterId: from, addresseeId: to, status: 'pending', createdAt: this.clock.now().toISOString(), respondedAt: null };
+    this.s.data.requests.push(r); this.s.notify(to, 'connection_request', `/profile/${from}`, `creq:${r.id}`, this.clock.now()); return r;
+  }
+  async respond(id        , actor        , action                                ) {
+    const r = this.s.data.requests.find(x => x.id === id);
+    if (!r || r.status !== 'pending') throw new DomainError('invalid_transition');
+    if (action === 'cancel' ? r.requesterId !== actor : r.addresseeId !== actor) throw new DomainError('forbidden');
+    r.status = action === 'accept' ? 'accepted' : action === 'reject' ? 'rejected' : 'cancelled'; r.respondedAt = this.clock.now().toISOString();
+    if (action === 'accept') this.s.notify(r.requesterId, 'connection_accepted', `/profile/${actor}`, `cacc:${r.id}`, this.clock.now());
+    return r;
+  }
+  async areConnected(a        , b        ) { return this.s.connected(a, b); }
+  async blockUser(blocker        , blocked        ) { if (!this.s.data.blocks.some(x => x.blockerId === blocker && x.blockedId === blocked)) this.s.data.blocks.push({ blockerId: blocker, blockedId: blocked }); }
+}
+
+                                         
+                                                                                                                                  
+                                                                                                                                                
+ 
+class MockNotificationRepository                                   {
+  s           ; clock       ; constructor(s           , clock       ) { this.s = s; this.clock = clock; }
+  async list(userId        , o                                      = {}) {
+    const limit = o.limit ?? 20;
+    const all = this.s.data.notifications.filter(n => n.userId === userId && (!o.before || n.createdAt < o.before)).sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+    const items = all.slice(0, limit); return { items, nextCursor: all.length > limit ? items[items.length - 1].createdAt : null };
+  }
+  async unreadCount(userId        ) { return this.s.data.notifications.filter(n => n.userId === userId && !n.readAt).length; }
+  async markRead(userId        , id        ) { const n = this.s.data.notifications.find(x => x.id === id && x.userId === userId); if (!n) throw new DomainError('not_found'); n.readAt ??= this.clock.now().toISOString(); }
+  async markAllRead(userId        ) { for (const n of this.s.data.notifications) if (n.userId === userId) n.readAt ??= this.clock.now().toISOString(); }
+}
+
+/** Production equivalent: scheduled server job (hourly), never the app. Local date is evaluated in the celebrant's own timezone. */
+class BirthdayNotificationService {
+  s           ; clock       ; constructor(s           , clock       ) { this.s = s; this.clock = clock; }
+  /** Simulated greeting: allowed only for accepted, unblocked connections whose birthday is visible and today (celebrant's timezone). */
+  sendWish(from        , to        )          {
+    const p = this.s.data.users.find(u => u.id === to), pref = this.s.data.birthdayPrefs.find(x => x.userId === to);
+    if (!p || !pref?.visible || !this.s.connected(from, to)) throw new DomainError('cannot_wish');
+    const local = new Intl.DateTimeFormat('en-CA', { timeZone: p.tz }).format(this.clock.now());
+    if (!isBirthdayOn(p.birthDate, local)) throw new DomainError('not_birthday_today');
+    return this.s.notify(to, 'birthday_wish', `/profile/${from}`, `wish:${from}:${to}:${local.slice(0, 4)}`, this.clock.now());
+  }
+  run()         {
+    const now = this.clock.now(); let created = 0;
+    for (const p of this.s.data.users) {
+      const pref = this.s.data.birthdayPrefs.find(x => x.userId === p.id);
+      if (!pref?.visible || !pref.reminders || p.accountStatus !== 'active') continue;           // hidden birthdays are never revealed
+      const local = new Intl.DateTimeFormat('en-CA', { timeZone: p.tz }).format(now);               // YYYY-MM-DD
+      if (!isBirthdayOn(p.birthDate, local)) continue;
+      for (const r of this.s.data.requests) {
+        if (r.status !== 'accepted' || (r.requesterId !== p.id && r.addresseeId !== p.id)) continue;
+        const to = r.requesterId === p.id ? r.addresseeId : r.requesterId;
+        if (this.s.blocked(p.id, to)) continue;
+        if (this.s.notify(to, 'birthday', `/profile/${p.id}`, `bday:${p.id}:${local.slice(0, 4)}:${to}`, now)) created++;
+      }
+    }
+    return created;
+  }
+}
+
+                                         
+                                                                                                                                                                 
+ 
+class MockVerificationRepository                                   {
+  s           ; clock       ; constructor(s           , clock       ) { this.s = s; this.clock = clock; }
+  private_case(userId        ) { const c = this.s.data.verification.find(v => v.userId === userId); if (!c) throw new DomainError('not_found'); return c; }
+  async status(userId        ) { return { ...this.private_case(userId) }; }
+  /** SIMULATED: any non-empty code passes while the case is pending and inside the 14-day window. Proves nothing about real presence. */
+  async redeemCheckin(userId        , code        ) {
+    const c = this.private_case(userId);
+    if (c.campusState !== 'pending' || Date.parse(c.campusDeadline) < this.clock.now().getTime() || !code.trim()) throw new DomainError('not_eligible_for_checkin');
+    c.campusState = 'verified'; return { ...c };
+  }
+  /** Idempotent. Only pending cases are touched, so verified accounts are never restricted for graduating or leaving campus. */
+  async enforceDeadlines() {
+    let n = 0;
+    for (const c of this.s.data.verification) if (c.campusState === 'pending' && Date.parse(c.campusDeadline) < this.clock.now().getTime()) {
+      c.campusState = 'expired'; const u = this.s.data.users.find(x => x.id === c.userId); if (u) u.accountStatus = 'restricted'; n++; }
+    return n;
+  }
+}
+
+                                                                                                                                                                               
+                                                                                   
+                                                                                                                                                                                          
+class MockFeedRepository                           {
+  s           ; clock       ; constructor(s           , clock       ) { this.s = s; this.clock = clock; }
+  visible(p      , viewer        ) { return !p.deletedAt && (p.authorId === viewer || (p.visibility !== 'private' && this.s.connected(p.authorId, viewer))); }
+  async feed(viewer        , o                                      = {}) {
+    return this.s.data.posts.filter(p => this.visible(p, viewer) && (!o.before || p.createdAt < o.before)).sort((a, b) => b.createdAt.localeCompare(a.createdAt)).slice(0, o.limit ?? 20);
+  }
+  async createPost(author        , body        , visibility             = 'connections') {
+    const t = body.trim(); if (!t || t.length > 1000) throw new DomainError('invalid_post');
+    const p       = { id: `pst_${this.s.seq++}`, authorId: author, body: t, visibility, createdAt: this.clock.now().toISOString(), deletedAt: null };
+    this.s.data.posts.push(p); return p;
+  }
+  async addComment(viewer        , postId        , body        ) {
+    const p = this.s.data.posts.find(x => x.id === postId);
+    if (!p || !this.visible(p, viewer)) throw new DomainError('not_found');
+    const t = body.trim(); if (!t || t.length > 300) throw new DomainError('invalid_comment');
+    const c          = { id: `cmt_${this.s.seq++}`, postId, authorId: viewer, body: t, createdAt: this.clock.now().toISOString() };
+    this.s.data.comments.push(c); return c;
+  }
+  async toggleSave(viewer        , postId        ) {
+    const p = this.s.data.posts.find(x => x.id === postId);
+    if (!p || !this.visible(p, viewer)) throw new DomainError('not_found');
+    const i = this.s.saved.findIndex(x => x.userId === viewer && x.postId === postId);
+    if (i >= 0) { this.s.saved.splice(i, 1); return false; }
+    this.s.saved.push({ userId: viewer, postId }); return true;
+  }
+  async savedPosts(viewer        ) {   // saved posts you can no longer see (e.g. after a block) are hidden
+    return this.s.saved.filter(x => x.userId === viewer).map(x => this.s.data.posts.find(p => p.id === x.postId)).filter((p)            => !!p && this.visible(p, viewer));
+  }
+  async toggleLike(viewer        , postId        ) {
+    const p = this.s.data.posts.find(x => x.id === postId);
+    if (!p || !this.visible(p, viewer)) throw new DomainError('not_found');
+    const i = this.s.data.likes.findIndex(l => l.postId === postId && l.userId === viewer);
+    if (i >= 0) { this.s.data.likes.splice(i, 1); return false; }
+    this.s.data.likes.push({ postId, userId: viewer, createdAt: this.clock.now().toISOString() }); return true;
+  }
+}
+
+
+return { MockStore, fixedClock, MockConnectionRepository, MockNotificationRepository, BirthdayNotificationService, MockVerificationRepository, MockFeedRepository, SEED_NOW, isBirthdayOn };
+})();
+</script>
+<script>
+const { MockStore, fixedClock, MockConnectionRepository, MockNotificationRepository, BirthdayNotificationService, MockVerificationRepository, MockFeedRepository, SEED_NOW, isBirthdayOn } = Y;
+const S = new MockStore(), clock = fixedClock(SEED_NOW);
+const conn = new MockConnectionRepository(S, clock), notes = new MockNotificationRepository(S, clock), bday = new BirthdayNotificationService(S, clock),
+  ver = new MockVerificationRepository(S, clock), feed = new MockFeedRepository(S, clock);
+bday.run();                                   // stands in for the scheduled server job
+let me = 'usr_01', modal = null, svT = 0, q = '';
+const seen = new Set(), $ = s => document.querySelector(s), U = id => S.data.users.find(u => u.id === id);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const num = id => parseInt(id.split('_')[1], 10) || 0, first = u => u.displayName.split(' ')[0];
+const P = { heart: '<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>',
+  chat: '<path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>',
+  send: '<path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>', save: '<path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>',
+  home: '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/>', search: '<circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>',
+  plus: '<rect x="3" y="3" width="18" height="18" rx="4"/><path d="M12 8v8M8 12h8"/>', user: '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
+  shield: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/>', x: '<path d="M18 6L6 18M6 6l12 12"/>', moon: '<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>',
+  grid: '<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>' };
+const I = (n, f = false, s = 24) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="${f ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${P[n]}</svg>`;
+const av = (u, z = 36) => `<span class="av" style="width:${z}px;height:${z}px;font-size:${z * .42}px;background:hsl(${(num(u.id) * 47) % 360} 65% 52%)">${esc(u.displayName[0])}</span>`;
+const ago = iso => { const m = Math.max(0, Math.round((clock.now() - Date.parse(iso)) / 6e4)); return m < 60 ? m + 'm' : m < 1440 ? Math.round(m / 60) + 'h' : Math.round(m / 1440) + 'd'; };
+const grad = p => `linear-gradient(135deg,hsl(${(num(p.id) * 37) % 360} 75% 55%),hsl(${(num(p.id) * 37 + 50) % 360} 75% 42%))`;
+const bdayToday = u => { const p = S.data.birthdayPrefs.find(x => x.userId === u.id); return !!p?.visible && isBirthdayOn(u.birthDate, new Intl.DateTimeFormat('en-CA', { timeZone: u.tz }).format(clock.now())); };
+const toast = m => { const t = $('#toast'); t.textContent = m; t.classList.add('on'); clearTimeout(toast.h); toast.h = setTimeout(() => t.classList.remove('on'), 2400); };
+const pendingBetween = id => S.data.requests.find(r => r.status === 'pending' && ((r.requesterId === me && r.addresseeId === id) || (r.requesterId === id && r.addresseeId === me)));
+const likesOf = id => S.data.likes.filter(l => l.postId === id), cmts = id => S.data.comments.filter(c => c.postId === id), isSaved = id => S.saved.some(x => x.userId === me && x.postId === id);
+const recent = uid => S.data.posts.filter(p => p.authorId === uid && feed.visible(p, me) && clock.now() - Date.parse(p.createdAt) < 864e5);
+
+function relBtn(id) {
+  if (id === me) return '';
+  if (S.connected(me, id)) return '<span class="pill">Connected</span>';
+  const r = pendingBetween(id);
+  if (!r) return `<button class="btn" data-act="connect" data-id="${id}">Connect</button>`;
+  return r.requesterId === me ? `<button class="btn ghost" data-act="cancel" data-id="${r.id}">Requested</button>`
+    : `<span><button class="btn" data-act="accept" data-id="${r.id}">Accept</button> <button class="btn ghost" data-act="reject" data-id="${r.id}">Reject</button></span>`;
+}
+function post(p, inModal = false) {
+  const u = U(p.authorId), L = likesOf(p.id), liked = L.some(l => l.userId === me), C = cmts(p.id);
+  return `<article class="post"><div class="ph"><a href="#/profile/${u.id}"><span class="ring none">${av(u, 32)}</span></a><span><a href="#/profile/${u.id}"><b>${esc(u.username)}</b></a> <small>• ${ago(p.createdAt)} • ${p.visibility}</small></span></div>
+  <div class="media" data-dbl="${p.id}" style="background:${grad(p)}"><p>${esc(p.body)}</p><span class="heart" aria-hidden="true">♥</span></div>
+  <div class="acts"><button data-act="like" data-id="${p.id}" class="${liked ? 'liked' : ''}" aria-pressed="${liked}" aria-label="${liked ? 'Unlike' : 'Like'}">${I('heart', liked)}</button><button data-act="open" data-id="${p.id}" aria-label="Comments">${I('chat')}</button><button data-act="share" data-id="${p.id}" aria-label="Copy link">${I('send')}</button><span class="sp"></span><button data-act="save" data-id="${p.id}" aria-pressed="${isSaved(p.id)}" aria-label="Save">${I('save', isSaved(p.id))}</button></div>
+  <div class="pad8"><b>${L.length} like${L.length === 1 ? '' : 's'}</b></div><div class="pad8"><b>${esc(u.username)}</b> ${esc(p.body)}</div>
+  ${C.length ? `<div class="pad8"><button class="mut" data-act="open" data-id="${p.id}">View all ${C.length} comments</button></div>` : ''}${C.slice(-1).map(c => `<div class="pad8"><b>${esc(U(c.authorId).username)}</b> ${esc(c.body)}</div>`).join('')}
+  <form class="cf" data-form="comment" data-id="${p.id}"><input name="t" maxlength="300" placeholder="Add a comment…" aria-label="Add a comment" required><button>Post</button></form></article>`;
+}
+async function home() {
+  const posts = await feed.feed(me, { limit: 20 }), ppl = S.data.users.filter(u => u.id === me || S.connected(me, u.id));
+  return `<div class="stories">${ppl.map(u => { const has = recent(u.id).length > 0;
+    return `<a class="story" ${has ? `href="#" data-act="story" data-id="${u.id}"` : `href="#/profile/${u.id}"`}><span class="ring ${has ? (seen.has(u.id) ? 'seen' : '') : 'none'}">${av(u, 56)}</span><small>${u.id === me ? 'Your story' : esc(first(u))}${bdayToday(u) ? ' 🎂' : ''}</small></a>`; }).join('')}</div>
+  ${posts.length ? posts.map(p => post(p)).join('') : '<div class="box">Your feed is empty. Connect with people in Search to see their posts.</div>'}`;
+}
+function results() {
+  const t = q.trim().toLowerCase();
+  if (t) { const r = S.data.users.filter(u => u.id !== me && !S.blocked(me, u.id) && (u.username.includes(t) || u.displayName.toLowerCase().includes(t))).slice(0, 15);
+    return r.length ? r.map(u => `<div class="row"><a href="#/profile/${u.id}"><div>${av(u, 44)}<span><b>${esc(u.username)}</b><br><small>${esc(u.displayName)} · ${esc(u.course)}</small></span></div></a>${relBtn(u.id)}</div>`).join('') : '<p class="mut">No results.</p>'; }
+  const ps = S.data.posts.filter(p => feed.visible(p, me));
+  return `<div class="grid3">${ps.map(tile).join('')}</div><div class="box" style="margin:1rem 0"><h2>Upcoming events</h2>${S.data.events.slice(0, 4).map(e => `<div class="row"><b>${esc(e.title)}</b><small>${esc(e.location)} · ${new Date(e.startsAt).toDateString()}</small></div>`).join('')}</div>
+  <div class="box" style="margin:0"><h2>Lost &amp; Found</h2>${S.data.lostFound.filter(i => i.status === 'open').slice(0, 4).map(i => `<div class="row"><span><span class="pill">${i.kind}</span> <b>${esc(i.title)}</b></span><small>${esc(i.location)}</small></div>`).join('')}</div>`;
+}
+const tile = p => `<button class="tile" data-act="open" data-id="${p.id}" style="background:${grad(p)}" aria-label="Open post">${esc(p.body.slice(0, 50))}<span class="hv">♥ ${likesOf(p.id).length} &nbsp; 💬 ${cmts(p.id).length}</span></button>`;
+async function explore() { return `<input class="field" data-search placeholder="Search people" aria-label="Search people" value="${esc(q)}" style="margin-bottom:1rem"><div id="results">${results()}</div>`; }
+const LABEL = { connection_request: 'sent you a connection request.', connection_accepted: 'accepted your request.', like: 'liked your post.', comment: 'commented on your post.', event_reminder: 'Event reminder.', verification: 'Verification update (simulated).', announcement: 'Campus announcement.', birthday: 'has a birthday today. 🎂', birthday_wish: 'sent you a birthday wish. 🎉' };
+async function alerts() {
+  const { items } = await notes.list(me, { limit: 30 }), inc = S.data.requests.filter(r => r.status === 'pending' && r.addresseeId === me);
+  return `<div style="padding:0 .8rem"><h2 style="font-size:1.4rem">Notifications <span class="sim">SIMULATED</span></h2>${inc.length ? `<b>Connection requests</b>${inc.map(r => `<div class="row"><a href="#/profile/${r.requesterId}"><div>${av(U(r.requesterId), 44)}<b>${esc(U(r.requesterId).username)}</b></div></a>${relBtn(r.requesterId)}</div>`).join('')}<hr style="border:0;border-top:1px solid var(--line)">` : ''}
+  <div class="row"><b>Earlier</b><button class="mut" data-act="readall">Mark all as read</button></div>${items.length ? items.map(n => { const m = n.link.match(/profile\/(.+)$/), who = m && U(m[1]);
+    return `<div class="row"><a href="#${n.link}" data-act="read" data-id="${n.id}"><div>${who ? av(who, 44) : I('heart')}<span>${who ? `<b>${esc(who.username)}</b> ` : ''}${LABEL[n.kind]} <small>${ago(n.createdAt)}</small></span></div></a>${n.readAt ? '' : '<span class="dot" aria-label="Unread"></span>'}</div>`; }).join('') : '<p class="mut">You’re all caught up.</p>'}</div>`;
+}
+async function profile(id, tab) {
+  const u = U(id); if (!u || S.blocked(me, id)) return '<div class="box">This profile isn’t available.</div>';
+  const own = id === me, conns = S.data.requests.filter(r => r.status === 'accepted' && (r.requesterId === id || r.addresseeId === id)).length;
+  const hidden = u.visibility === 'connections' && !own && !S.connected(me, id), saved = own && tab === 'saved';
+  const ps = saved ? await feed.savedPosts(me) : hidden ? [] : S.data.posts.filter(p => p.authorId === id && feed.visible(p, me));
+  const canWish = !own && S.connected(me, id) && bdayToday(u), pref = S.data.birthdayPrefs.find(x => x.userId === id);
+  return `<div class="wide" style="margin:0 auto"><div class="prof"><span class="ring ${own || S.connected(me, id) ? '' : 'none'}">${av(u, 96)}</span><div style="flex:1"><div class="ln"><h1>${esc(u.username)}</h1>${relBtn(id)}${own ? '<a class="pill" href="#/verify">Verification</a>' : `<button class="pill" data-act="block" data-id="${id}">Block</button>`}</div>
+  <div class="stats"><span><b>${S.data.posts.filter(p => p.authorId === id && feed.visible(p, me)).length}</b> posts</span><span><b>${conns}</b> connections</span></div>
+  <div><b>${esc(u.displayName)}</b></div><div class="mut">${esc(u.course)}${u.enrollmentKind === 'graduate' ? ' · Alumni' : ''}</div>${(own || (pref?.visible && S.connected(me, id))) ? `<div>🎂 ${esc(u.birthDate.slice(5))}</div>` : ''}</div></div>
+  ${canWish ? `<form class="box" data-form="wish" data-id="${id}" style="display:flex;gap:.5rem;align-items:center"><b style="flex:1">It’s ${esc(first(u))}’s birthday! 🎉</b><button class="btn">Send Happy Birthday</button></form>` : ''}
+  <nav class="tabs"><a href="#/profile/${id}" class="${saved ? '' : 'on'}">${I('grid', false, 14)} POSTS</a>${own ? `<a href="#/profile/${id}/saved" class="${saved ? 'on' : ''}">${I('save', false, 14)} SAVED</a>` : ''}</nav>
+  ${hidden ? '<div class="box" style="margin-top:1rem">This account is private. Connect to see posts.</div>' : ps.length ? `<div class="grid3">${ps.map(tile).join('')}</div>` : `<div class="box" style="margin-top:1rem">${saved ? 'Nothing saved yet.' : 'No posts yet.'}</div>`}</div>`;
+}
+async function verify() {
+  const c = await ver.status(me), left = Math.ceil((Date.parse(c.campusDeadline) - clock.now()) / 864e5), st = s => `<span class="pill">${s.replace('_', ' ')}</span>`;
+  const msg = c.campusState === 'verified' ? 'Campus presence verified (simulated). Graduating or leaving campus never blocks a verified account.' : c.campusState === 'pending' ? `${left} day(s) left to complete the 14-day campus check-in.` : c.campusState === 'expired' ? 'The 14-day window passed. Account restricted (simulated). You can request manual review.' : 'Your case is under manual review.';
+  return `<div class="box"><h2>Verification <span class="sim">SIMULATED</span></h2><p class="mut">Nothing here is real verification. It demonstrates the workflow and rules.</p>
+  ${[['College email', c.emailStatus], ['Student ID', c.idStatus], ['Face liveness (optional)', c.livenessStatus], ['Campus presence', c.campusState]].map(([n, s]) => `<div class="row"><span>${n}</span>${st(s)}</div>`).join('')}<p><b>${msg}</b></p>
+  ${c.campusState === 'pending' ? '<form data-form="checkin" style="display:flex;gap:.5rem"><input class="field" name="c" placeholder="Check-in code (any text in demo)" aria-label="Check-in code" required><button class="btn">Verify</button></form>' : ''}${c.campusState === 'expired' ? '<button class="btn" data-act="appeal">Request manual review</button>' : ''}</div>
+  <div class="box"><h2>Demo controls</h2><button class="btn ghost" data-act="ff">Fast-forward demo clock 15 days</button> <button class="btn ghost" data-act="reset">Reset demo data</button></div>`;
+}
+const ov = (html, cls = '') => { const o = $('#ov'); o.className = 'on ' + cls; o.innerHTML = html; }, closeOv = () => { clearTimeout(svT); modal = null; $('#ov').className = ''; $('#ov').innerHTML = ''; if (location.hash.startsWith('#/post/')) location.hash = '#/home'; };
+function showPost(id) {
+  const p = S.data.posts.find(x => x.id === id); if (!p || !feed.visible(p, me)) { closeOv(); return; } modal = id;
+  const u = U(p.authorId), L = likesOf(id), liked = L.some(l => l.userId === me), C = cmts(id), keep = $('#ov .cf input')?.value || '';
+  ov(`<div class="pm"><button class="x" data-act="close" aria-label="Close">${I('x', false, 20)}</button><div class="media" style="background:${grad(p)}"><p>${esc(p.body)}</p></div><div class="pr"><div class="ph"><span class="ring none">${av(u, 32)}</span><a href="#/profile/${u.id}" data-act="close"><b>${esc(u.username)}</b></a></div>
+  <div class="cl"><p><b>${esc(u.username)}</b> ${esc(p.body)}</p>${C.map(c => `<p><b>${esc(U(c.authorId).username)}</b> ${esc(c.body)} <small>${ago(c.createdAt)}</small></p>`).join('')}</div>
+  <div class="acts"><button data-act="like" data-id="${id}" class="${liked ? 'liked' : ''}" aria-pressed="${liked}" aria-label="Like">${I('heart', liked)}</button><button data-act="share" data-id="${id}" aria-label="Copy link">${I('send')}</button><span class="sp"></span><button data-act="save" data-id="${id}" aria-pressed="${isSaved(id)}" aria-label="Save">${I('save', isSaved(id))}</button></div>
+  <div class="pad8"><b>${L.length} like${L.length === 1 ? '' : 's'}</b></div><form class="cf" data-form="comment" data-id="${id}"><input name="t" maxlength="300" placeholder="Add a comment…" aria-label="Add a comment" required value="${esc(keep)}"><button>Post</button></form></div></div>`);
+}
+function story(ids, i) {
+  clearTimeout(svT); if (i < 0) i = 0; if (i >= ids.length) return closeOv();
+  const u = U(ids[i]), list = recent(u.id), p = list[list.length - 1]; if (!p) return story(ids, i + 1); seen.add(u.id);
+  ov(`<div class="sv" data-sv style="background:${grad(p)}"><div class="pb"><i></i></div><div class="sh">${av(u, 32)} ${esc(u.username)} <small style="color:#fff;opacity:.8">${ago(p.createdAt)}</small></div><button class="x" data-act="close" aria-label="Close">${I('x', false, 20)}</button><p>${esc(p.body)}</p></div>`);
+  $('#ov').dataset.i = i; $('#ov').dataset.ids = ids.join(','); svT = setTimeout(() => story(ids, i + 1), 5000);
+}
+function nav() {
+  const [v, arg] = (location.hash.slice(2) || 'home').split('/'), unread = nav.unread || 0, sz = 26;
+  const items = [['home', 'home', 'Home', '#/home'], ['explore', 'search', 'Search', '#/explore'], ['notifications', 'heart', 'Notifications', '#/notifications']];
+  const link = (k, ic, t, h, full) => `<a href="${h}" class="${v === k ? 'on' : ''}" aria-label="${t}">${I(ic, v === k, sz)}${full ? `<span>${t}</span>` : ''}${k === 'notifications' && unread ? `<span class="badge">${unread}</span>` : ''}</a>`;
+  const mk = full => items.map(i => link(...i, full)).join('') + `<button class="ni" data-act="create" aria-label="Create">${I('plus', false, sz)}${full ? '<span>Create</span>' : ''}</button>` + link('verify', 'shield', 'Verification', '#/verify', full) + link('profile', 'user', 'Profile', '#/profile/' + me, full);
+  $('#rail').innerHTML = `<span class="logo">YUVIXA</span>${mk(true)}<span style="flex:1"></span><button class="ni" data-act="theme">${I('moon', false, sz)}<span>Switch appearance</span></button>`;
+  $('#bottom').innerHTML = mk(false); $('#t1').innerHTML = I('moon', false, 20);
+}
+async function render() {
+  const [v, arg, tab] = (location.hash.slice(2) || 'home').split('/'); nav.unread = await notes.unreadCount(me); nav();
+  const views = { home, post: home, explore, notifications: alerts, verify, profile: () => profile(arg || me, tab) };
+  const col = $('#view'); col.className = v === 'profile' ? 'wide' : 'col';
+  const focused = document.activeElement?.matches?.('[data-search]');
+  if (!(v === 'explore' && focused)) col.innerHTML = await (views[v] || (async () => '<div class="box">Page not found.</div>'))();
+  const sug = S.data.users.filter(u => u.id !== me && !S.connected(me, u.id) && !S.blocked(me, u.id)).slice(0, 5), mu = U(me);
+  $('#right').innerHTML = `<div class="row"><div>${av(mu, 52)}<span><b>${esc(mu.username)}</b><br><small>${esc(mu.displayName)}</small></span></div><select class="who" aria-label="Demo: view as user"></select></div>
+  <div class="row"><b class="mut">Suggested for you</b><a href="#/explore" class="mut">See all</a></div>${sug.map(u => `<div class="row"><a href="#/profile/${u.id}"><div>${av(u, 36)}<span><b>${esc(u.username)}</b><br><small>${esc(u.course)}</small></span></div></a>${relBtn(u.id)}</div>`).join('')}<small>© YUVIXA demo · Your Campus. Your People. Your World.</small>`;
+  document.querySelectorAll('.who').forEach(s => { s.innerHTML = S.data.users.map(u => `<option value="${u.id}">${esc(u.displayName)}</option>`).join(''); s.value = me; });
+  if (v === 'post' && modal !== arg) showPost(arg); else if (modal) showPost(modal);
+}
+const ERR = { duplicate_request: 'Request already exists.', cannot_connect: 'You can’t connect with this user.', not_found: 'Not available.', cannot_wish: 'You can only wish connected friends who share their birthday.', not_birthday_today: 'It isn’t their birthday today.', not_eligible_for_checkin: 'Check-in isn’t available for this account.', invalid_post: 'Write something first.', invalid_comment: 'Comment can’t be empty.' };
+async function run(fn) { try { await fn(); } catch (e) { toast(ERR[e.code] || 'Something went wrong. Please try again.'); } await render(); }
+const ACT = {
+  like: d => feed.toggleLike(me, d.id), save: async d => toast((await feed.toggleSave(me, d.id)) ? 'Saved' : 'Removed from saved'), open: d => { modal = d.id; },
+  share: async d => { const link = location.href.split('#')[0] + '#/post/' + d.id; try { await navigator.clipboard.writeText(link); toast('Link copied'); } catch { toast(link); } },
+  connect: async d => { await conn.send(me, d.id); toast('Request sent (demo)'); }, accept: async d => { await conn.respond(d.id, me, 'accept'); toast('Connected'); },
+  reject: d => conn.respond(d.id, me, 'reject'), cancel: d => conn.respond(d.id, me, 'cancel'), readall: () => notes.markAllRead(me), read: d => notes.markRead(me, d.id),
+  block: async d => { await conn.blockUser(me, d.id); location.hash = '#/home'; toast('User blocked'); },
+  ff: async () => { clock.set(new Date(clock.now().getTime() + 15 * 864e5).toISOString()); const n = await ver.enforceDeadlines(); bday.run(); toast(`Clock +15 days · ${n} account(s) restricted (simulated)`); },
+  reset: async () => { S.reset(); clock.set(SEED_NOW); bday.run(); seen.clear(); toast('Demo data reset'); },
+  appeal: () => { S.data.verification.find(v => v.userId === me).campusState = 'review_needed'; toast('Appeal submitted for manual review (simulated)'); },
+  theme: () => { const r = document.documentElement, d = r.dataset.theme ? r.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches; r.dataset.theme = d ? 'light' : 'dark'; },
+  create: () => { ov(`<div class="cm"><button class="x" style="color:var(--ink);background:var(--soft)" data-act="close" aria-label="Close">${I('x', false, 20)}</button><h2>Create new post</h2><form data-form="post" style="display:grid;gap:.6rem"><textarea class="field" name="t" rows="6" maxlength="1000" placeholder="Share something with your campus…" aria-label="Post text" required></textarea><select name="v" aria-label="Who can see this"><option value="connections">Connections</option><option value="private">Only me</option></select><button class="btn">Share</button></form></div>`); modal = null; },
+  story: d => { const ids = S.data.users.filter(u => (u.id === me || S.connected(me, u.id)) && recent(u.id).length).map(u => u.id); story(ids, Math.max(0, ids.indexOf(d.id))); return 'noRender'; },
+  close: () => closeOv()
+};
+document.addEventListener('click', e => {
+  const t = e.target.closest('[data-act]');
+  if (t && ACT[t.dataset.act]) { if (t.tagName !== 'A' || t.getAttribute('href') === '#') e.preventDefault(); const k = t.dataset.act;
+    if (k === 'story' || k === 'close' || k === 'create') { ACT[k](t.dataset); if (k === 'close') render(); return; } run(() => ACT[k](t.dataset)); return; }
+  const sv = e.target.closest('[data-sv]');
+  if (sv) { const o = $('#ov'), ids = o.dataset.ids.split(','), i = +o.dataset.i, r = sv.getBoundingClientRect(); story(ids, e.clientX - r.left < r.width / 3 ? i - 1 : i + 1); return; }
+  if (e.target.id === 'ov') { closeOv(); render(); }
+});
+document.addEventListener('dblclick', e => { const t = e.target.closest('[data-dbl]'); if (!t) return; const h = t.querySelector('.heart'); h.classList.remove('go'); void h.offsetWidth; h.classList.add('go');
+  if (!likesOf(t.dataset.dbl).some(l => l.userId === me)) run(() => feed.toggleLike(me, t.dataset.dbl)); });
+document.addEventListener('submit', e => {
+  const f = e.target.closest('[data-form]'); if (!f) return; e.preventDefault(); const d = new FormData(f), k = f.dataset.form, id = f.dataset.id;
+  run(async () => {
+    if (k === 'post') { await feed.createPost(me, d.get('t'), d.get('v')); closeOv(); toast('Posted'); }
+    if (k === 'comment') { await feed.addComment(me, id, d.get('t')); f.reset(); }
+    if (k === 'wish') toast(bday.sendWish(me, id) ? 'Birthday wish sent (simulated)' : 'You already sent a wish today');
+    if (k === 'checkin') { await ver.redeemCheckin(me, d.get('c')); toast('Verified (simulated)'); }
+  });
+});
+document.addEventListener('input', e => { if (e.target.matches('[data-search]')) { q = e.target.value; $('#results').innerHTML = results(); } });
+document.addEventListener('change', e => { if (e.target.matches('.who')) { me = e.target.value; closeOv(); location.hash = '#/home'; render(); } });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && $('#ov').classList.contains('on')) { closeOv(); render(); } });
+window.addEventListener('hashchange', () => { q = location.hash.startsWith('#/explore') ? q : ''; render(); }); render();
+</script>
+</body>
+</html>
